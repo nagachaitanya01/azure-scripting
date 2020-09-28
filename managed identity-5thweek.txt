@@ -1,0 +1,14 @@
+Managed Identities:
+$response = Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -Method GET -Headers @{Metadata="true"}
+$content = $response.Content | ConvertFrom-Json
+$KeyVaultToken = $content.access_token
+$res = (Invoke-WebRequest -Uri https://azureb10.vault.azure.net/secrets/MyPassword?api-version=2016-10-01 -Method GET -Headers @{Authorization="Bearer $KeyVaultToken"}).content
+$resvalue = $res | ConvertFrom-Json
+$apppassword = $resvalue.value
+echo $apppassword
+
+
+https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-nonaad
+
+https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-storage-sas
+

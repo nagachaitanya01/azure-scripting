@@ -1,0 +1,9 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Install-Module Az -AllowClobber -Verbose -Force
+
+
+===========7th weekend 18-07-2020  poershell for creating storage accounts============
+vi arm.json
+vi parameters.json
+New-AzResourceGroupDeployment -Name bnc -Templatefile arm.json -ResourceGroupName AZUREB8 -Verbose -Mode Complete/Incremental -Debug
+New-AzResourceGroupDeployment -Name bnc -Templatefile arm.json -Templatefile parameters.json -ResourceGroupName AZUREB8 -Verbose   (if parameters are there)

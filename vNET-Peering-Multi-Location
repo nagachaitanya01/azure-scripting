@@ -1,0 +1,66 @@
+===========================================CREATING PROD-RG RESOURCES=========================================================================
+echo "Creating Azure Resource Group"
+az group create -l eastus -n PROD-RG
+
+echo "Creating Azure Virtual Network"
+az network vnet create -g PROD-RG -n PROD-RG-vNET1 --address-prefix 10.1.0.0/16 \
+--subnet-name PROD-RG-Subnet-1 --subnet-prefix 10.1.1.0/24 -l eastus
+
+az network nsg create -g PROD-RG -n PROD-RG_NSG1 --location eastus
+
+az network nsg rule create -g PROD-RG --nsg-name PROD-RG_NSG1 -n PROD-RG_NSG1_RULE1 --priority 100 \
+--source-address-prefixes '*' --source-port-ranges '*'     --destination-address-prefixes '*' \
+--destination-port-ranges '*' --access Allow     --protocol Tcp --description "Allowing All Traffic For Now"
+
+az vm create --resource-group PROD-RG --name PROD-RGTestVM1 --image UbuntuLTS --vnet-name PROD-RG-vNET1 \
+--subnet PROD-RG-Subnet-1 --admin-username testuser --admin-password "India@123456" --size Standard_B1s \
+--nsg PROD-RG_NSG1
+
+az network vnet create -g PROD-RG -n PROD-RG-vNET2 --address-prefix 10.2.0.0/16 \
+--subnet-name PROD-RG-Subnet-2 --subnet-prefix 10.2.1.0/24 -l eastus
+
+
+az vm create --resource-group PROD-RG --name PROD-RGTestVM2 --image UbuntuLTS --vnet-name PROD-RG-vNET2 \
+--subnet PROD-RG-Subnet-2 --admin-username testuser --admin-password "India@123456" --size Standard_B1s \
+--nsg PROD-RG_NSG1
+===========================================CREATING DEV-RG RESOURCES=========================================================================
+echo "Creating Azure Resource Group"
+az group create -l eastus -n DEV-RG
+
+echo "Creating Azure Virtual Network"
+az network vnet create -g DEV-RG -n DEV-RG-vNET1 --address-prefix 10.10.0.0/16 \
+--subnet-name DEV-RG-Subnet-1 --subnet-prefix 10.10.1.0/24 -l eastus
+
+az network nsg create -g DEV-RG -n DEV-RG_NSG1 --location eastus
+
+az network nsg rule create -g DEV-RG --nsg-name DEV-RG_NSG1 -n DEV-RG_NSG1_RULE1 --priority 100 \
+--source-address-prefixes '*' --source-port-ranges '*'     --destination-address-prefixes '*' \
+--destination-port-ranges '*' --access Allow     --protocol Tcp --description "Allowing All Traffic For Now"
+
+az vm create --resource-group DEV-RG --name DEV-RGTestVM1 --image UbuntuLTS --vnet-name DEV-RG-vNET1 \
+--subnet DEV-RG-Subnet-1 --admin-username testuser --admin-password "India@123456" --size Standard_B1s \
+--nsg DEV-RG_NSG1
+
+===========================================CREATING TEST-RG RESOURCES=========================================================================
+echo "Creating Azure Resource Group"
+az group create -l westus -n TEST-RG
+
+echo "Creating Azure Virtual Network"
+az network vnet create -g TEST-RG -n TEST-RG-vNET1 --address-prefix 172.16.0.0/16 \
+--subnet-name TEST-RG-Subnet-1 --subnet-prefix 172.16.1.0/24 -l westus
+
+az network nsg create -g TEST-RG -n TEST-RG_NSG1 --location westus
+
+az network nsg rule create -g TEST-RG --nsg-name TEST-RG_NSG1 -n TEST-RG_NSG1_RULE1 --priority 100 \
+--source-address-prefixes '*' --source-port-ranges '*'     --destination-address-prefixes '*' \
+--destination-port-ranges '*' --access Allow     --protocol Tcp --description "Allowing All Traffic For Now"
+
+az vm create --resource-group TEST-RG --name TEST-RGTestVM1 --image UbuntuLTS --vnet-name TEST-RG-vNET1 \
+--subnet TEST-RG-Subnet-1 --admin-username testuser --admin-password "India@123456" --size Standard_B1s \
+--nsg TEST-RG_NSG1
+
+============================================================================================================================
+az network public-ip create -g AZUREB9 -n azureb9testvm1 --sku standard --location eastus &&
+az network public-ip create -g AZUREB9 -n azureb9testvm2 --sku standard --location eastus &&
+az network public-ip create -g AZUREB9 -n azureb9testvm3 --sku standard --location eastus &&
+watch ls

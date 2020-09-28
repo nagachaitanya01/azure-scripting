@@ -1,0 +1,7 @@
+https://engazureb02straccount.z13.web.core.windows.net/
+
+urn="MicrosoftWindowsServer:WindowsServer:2016-Datacenter-smalldisk:14393.3085.1907121547"
+echo "creating vm's"
+az vm create --resource-group AZUREB8 --name WINDOWSVM1 --image $urn --vnet-name AZUREB8-vNET1 \
+--subnet AZUREB8-Subnet-1 --admin-username testuser --admin-password "India@123456" --size Standard_B1s \
+--availability-set EAST-AVSET1 --nsg AZUREB8_NSG1 

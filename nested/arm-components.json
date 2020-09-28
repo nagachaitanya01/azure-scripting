@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageaccountname1": {
+            "type": "string",
+            "metadata": {
+                "description": "enter sorageaccount name 1"
+            }
+        },
+        "storageaccountname2": {
+            "type": "string",
+            "metadata": {
+                "description": "enter sorageaccount name 2"
+            }
+        },
+        "storageaccountname3": {
+            "type": "string",
+            "metadata": {
+                "description": "enter sorageaccount name 3"
+            }
+        },
+        "storageaccountname4": {
+            "type": "string",
+            "metadata": {
+                "description": "enter sorageaccount name 4"
+            }
+        },
+        "storageaccountname5": {
+            "type": "string",
+            "metadata": {
+                "description": "enter sorageaccount name 5"
+            }
+        }
+    },
+    "variables": {
+        "storageaccounttype": "Standard_LRS",
+        "tier": "Standard"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageaccountname1')]",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]",
+                "tier": "[variables('tier')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageaccountname2')]",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]",
+                "tier": "[variables('tier')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageaccountname3')]",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]",
+                "tier": "[variables('tier')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageaccountname4')]",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]",
+                "tier": "[variables('tier')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageaccountname5')]",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]",
+                "tier": "[variables('tier')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        }
+    ]
+}

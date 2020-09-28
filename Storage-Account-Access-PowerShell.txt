@@ -1,0 +1,59 @@
+﻿Storage Account Blob Access Using connection string:
+
+
+$connectionstring = 'DefaultEndpointsProtocol=https;AccountName=engazureb02straccount1;AccountKey=ih/QRQeHywiiE32yzKyipRhzyeCIgAryGjt/OH2WUlYeTvhx6gqVRk8YUQYctNMY5SV0E3GYaoQpRvQyMYNvUg==;EndpointSuffix=core.windows.net'
+$storage_account = New-AzStorageContext -ConnectionString $connectionstring
+$container_name = 'testfiles'
+$blobs = Get-AzStorageBlob -Container $container_name -Context $storage_account
+foreach ($blob in $blobs){
+Write-Output $blob | select Name, Length
+}
+
+
+
+
+
+
+
+
+Storage Account Blob Access Using Storage Account & Key:
+
+
+$StorageAccountName = "engazureb02straccount1"
+$StorageAccountKey = "ih/QRQeHywiiE32yzKyipRhzyeCIgAryGjt/OH2WUlYeTvhx6gqVRk8YUQYctNMY5SV0E3GYaoQpRvQyMYNvUg=="
+$ctx = New-AzStorageContext -StorageAccountName $StorageAccountName -StorageAccountKey $StorageAccountKey
+#Write-Output $ctx
+$container_name = 'testfiles'
+$blobs = Get-AzStorageBlob -Container $container_name -Context $storage_account
+foreach ($blob in $blobs){
+Write-Output $blob | select Name, Length
+}
+
+
+
+
+
+
+
+
+Storage Account Blob Access Using SAS Token:
+#Get Token From Azure AD to Talk with Storage Account
+$response = Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -Method GET -Headers @{Metadata="true"}
+$content = $response.Content | ConvertFrom-Json
+$KeyVaultToken = $content.access_token
+Write-Output "The AzureAD Token is: $KeyVaultToken"
+Write-Output "========================================================================"
+$params = @{canonicalizedResource="/blob/engazureb02straccount1/testfiles";signedResource="c";signedPermission="rcw";signedProtocol="https";signedExpiry="2020-07-06T00:00:00Z"}
+$jsonParams = $params | ConvertTo-Json
+#Write-Output $jsonParams
+$sasResponse = Invoke-WebRequest -Uri https://management.azure.com/subscriptions/298f2c19-014b-4195-b821-e3d8fc25c2a8/resourceGroups/AZUREB8/providers/Microsoft.Storage/storageAccounts/engazureb02straccount1/listServiceSas/?api-version=2017-06-01 -Method POST -Body $jsonParams -Headers @{Authorization="Bearer $KeyVaultToken"}
+$sasContent = $sasResponse.Content | ConvertFrom-Json
+$sasCred = $sasContent.serviceSasToken
+Write-Output "The Storage SAS Token is: $sasCred"
+Write-Output "============================================================================="
+$ctx = New-AzStorageContext -StorageAccountName engazureb02straccount1 -SasToken $sasCred
+$container_name = 'testfiles'
+$blobs = Get-AzStorageBlob -Container $container_name -Context $storage_account
+foreach ($blob in $blobs){
+Write-Output $blob | select Name, Length
+}

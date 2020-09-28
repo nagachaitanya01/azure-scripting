@@ -1,0 +1,7 @@
+﻿0. Create a User account with global admin permissions and login with temp password and reset it. Make sure you add this user to “AAD DC Administrators “ Group.
+1. Deploy ADDS which will take 90 min.
+2. Deploy a windows machine and make sure you gave the DNS
+   on the NIC Level which is directed towards AD DS        controllers.
+3. Install LDAP Tools. If you are unable to reach the domain, manually give the DNS Names from the IP Addresses config. This will sure  the connectivity to the server. Make sure you have another windows server in the network to take RDP.
+4. Disable firewalls and add the user to the domain using the IP and Password of the global user created in step 1.
+5. You might login issue saying "Not allowed to login." Wait few min and use the complete login name as adsync@mavrick202gmail.onmicrosoft.com and check if you able to open dsa.msc and verify AD DS window.

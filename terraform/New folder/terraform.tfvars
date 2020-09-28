@@ -1,0 +1,5 @@
+location = "eastus"
+rg1-name = "MY-PROD-RG1"
+saccount1 = "engazureprodbahubali01"
+account_tier = "Standard"
+replication = "LRS"

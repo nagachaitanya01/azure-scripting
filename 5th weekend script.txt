@@ -1,0 +1,6 @@
+#Folders
+New-Item -ItemType Directory c:\temp222
+New-Item -ItemType Directory c:\music222
+
+#Install iis
+Install-WindowsFeature web-server -IncludeManagementTools

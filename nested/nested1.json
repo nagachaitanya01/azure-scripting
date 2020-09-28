@@ -1,0 +1,26 @@
+{
+  "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion":"1.0.0.0",
+  "parameters":{
+
+  },
+  "variables":{
+     "location":"eastus",
+     "storageAccountType":"Standard_LRS"
+  },
+  "resources":[
+     {
+        "type":"Microsoft.Storage/storageAccounts",
+        "apiVersion":"2018-11-01",
+        "name":"sreeazurestorage001",
+        "location":"[variables('location')]",
+        "sku":{
+           "name":"[variables('storageAccountType')]"
+        },
+        "kind":"Storage",
+        "properties":{
+
+        }
+     }
+  ]
+}

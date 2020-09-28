@@ -1,0 +1,42 @@
+{
+    "people": [
+        {
+            "name": "bnc",
+            "location": "gnt",
+            "profession": "bevars",
+            "hobbies": [
+                {
+                    "cloud": [
+                        "aws",
+                        "azure",
+                        "devops"
+                    ]
+                },
+                {
+                    "eating": [
+                        "birayani",
+                        "panipuri",
+                        "ice-cream"
+                    ]
+                },
+                {
+                    "playing": [
+                        "cricket",
+                        "coco",
+                        "volleyball"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "divya",
+            "location": "gnt",
+            "profession": "it employee",
+            "hobbies": [
+                "teaching",
+                "eating",
+                "playing"
+            ]
+        }
+    ]
+}

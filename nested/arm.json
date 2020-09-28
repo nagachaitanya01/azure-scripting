@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "storageaccounttype": "Standard_GRS"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount100",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount101",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount102",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount103",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount104",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "sreeazurestoraccount105",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
+            "sku": {
+                "name": "[variables('storageaccounttype')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        }
+    ]
+}
